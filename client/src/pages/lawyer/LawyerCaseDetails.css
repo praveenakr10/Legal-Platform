@@ -1,0 +1,338 @@
+/* General Page Styles */
+.case-details-page {
+  padding: 30px;
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color: #333;
+}
+
+.case-details-page h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 25px;
+  color: #1a202c;
+}
+
+/* Generic Card for Sections */
+.case-section-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+.case-section-card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Case Summary Card */
+.case-summary-card {
+  background: #F1F6FC;
+  border: 1px solid #dbe8f8;
+  border-radius: 12px;
+  padding: 22px 28px;
+  margin-bottom: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.summary-item {
+  font-size: 1rem;
+}
+
+.summary-item b {
+  color: #4a5568;
+  margin-right: 8px;
+}
+
+.summary-item a {
+  color: #1268D3;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.summary-item a:hover {
+  text-decoration: underline;
+}
+
+/* Document Upload Form */
+.document-upload-form {
+  background: #f7fafc;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px dashed #cbd5e0;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.file-input-label {
+  font-weight: bold;
+  margin: 0;
+}
+
+.upload-button {
+  background: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 20px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.upload-button:hover:not(:disabled) {
+  background: #388E3C;
+}
+
+.upload-button:disabled {
+  background: #9e9e9e;
+  cursor: not-allowed;
+}
+
+/* Lists (Documents & Meetings) */
+.item-list {
+  list-style: none;
+  padding: 0;
+}
+
+.item-list li {
+  padding: 12px 5px;
+  border-bottom: 1px solid #edf2f7;
+  display: flex;
+  justify-content: space-between;
+}
+
+.item-list li:last-child {
+  border-bottom: none;
+}
+
+.item-list a {
+  color: #1268D3;
+  text-decoration: none;
+}
+
+.item-list a:hover {
+  text-decoration: underline;
+}
+
+.no-items-message {
+  color: #718096;
+  padding: 15px 0;
+  display: block; /* Override flex for this item */
+}
+
+/* Meeting Item Specifics */
+.meeting-item-details {
+  line-height: 1.6;
+}
+
+.meeting-item-details b {
+  color: #4a5568;
+}
+
+.meeting-status {
+  font-weight: bold;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  text-transform: capitalize;
+  margin-left: 8px;
+}
+
+.status-scheduled { background-color: #e0f2fe; color: #0c54a1; }
+.status-completed { background-color: #dcfce7; color: #15803d; }
+.status-cancelled { background-color: #fee2e2; color: #b91c1c; }
+
+.meeting-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+  min-width: 140px; /* Increase width to prevent crowding */
+  margin-left: 150px; /* Add margin for spacing */
+}
+
+.meeting-actions button {
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  width: 100%;
+  text-align: center;
+}
+
+.btn-cancel { background: #d32f2f; }
+.btn-cancel:hover { background: #b71c1c; }
+
+.btn-edit { background: #f57c00; }
+.btn-edit:hover { background: #ef6c00; }
+
+.btn-complete { background: #388e3c; }
+.btn-complete:hover { background: #2e7d32; }
+
+/* Add Meeting Form */
+.add-meeting-form {
+  background: #f7fafc;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  margin-top: 15px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-group label {
+  font-weight: 500;
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 8px 12px;
+  border: 1px solid #cbd5e0;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+/* Progress Editing */
+.progress-edit-form {
+  background: #f7fafc;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  margin-top: 10px;
+}
+
+.progress-edit-form textarea {
+  width: 100%;
+  height: 100px;
+  padding: 8px 12px;
+  border: 1px solid #cbd5e0;
+  border-radius: 6px;
+  font-size: 1rem;
+  resize: vertical;
+}
+
+.progress-edit-form button {
+  margin-right: 10px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.progress-edit-form .save-btn {
+  background: #388e3c;
+  color: white;
+}
+
+.progress-edit-form .cancel-btn {
+  background: #757575;
+  color: white;
+}
+
+/* Edit Progress Button */
+.edit-progress-btn {
+  background: none;
+  border: 1px solid #718096;
+  color: #718096;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-top: 10px;
+  transition: background-color 0.2s;
+}
+
+.edit-progress-btn:hover {
+  background: #f3f4f6;
+}
+
+/* Chat Button */
+.chat-button-container {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.chat-button {
+  background: #1268D3;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 14px 35px;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.chat-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(18, 104, 211, 0.3);
+}
+
+/* Generic Action Button */
+.action-button {
+  background-color: #1268D3;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  margin-bottom: 20px;
+  transition: background-color 0.2s;
+}
+
+/* Close Case Button */
+.close-case-container {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.close-case-btn {
+  background: #d32f2f;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.close-case-btn:hover {
+  background: #b71c1c;
+}
