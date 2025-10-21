@@ -1,13 +1,22 @@
-# Dependencies
+# Node modules
 /node_modules
 /client/node_modules
 /server/node_modules
 
-# Build folder
+# Build folders
 /client/build
+/server/build
 
-# User-generated content
+# User uploads
 /server/uploads/
 
 # Environment variables
 .env
+server/.env
+client/.env
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
