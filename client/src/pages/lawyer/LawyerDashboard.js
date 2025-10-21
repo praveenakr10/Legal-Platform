@@ -23,18 +23,21 @@ function LawyerDashboard() {
         });
         setLawyerName(profileRes.data.name);
         setVerificationStatus(profileRes.data.approved ? 'Approved' : 'Pending');
+        if (profileRes.data.approved === false && profileRes.data.rejectionReason) {
+          setVerificationStatus('Rejected');
+        }
         if (!profileRes.data.approved && profileRes.data.rejectionReason) {
           setRejectionReason(profileRes.data.rejectionReason);
         }
 
         // Fetch incoming requests
-        const requestsRes = await axios.get('/lawyer/requests', {
+        const requestsRes = await axios.get('/cases?status=pending', {
           headers: { Authorization: `Bearer ${token}` }
         });
         setIncomingRequests(requestsRes.data.length);
 
         // Fetch ongoing cases
-        const casesRes = await axios.get('/lawyer/cases?status=ongoing', {
+        const casesRes = await axios.get('/cases?status=ongoing', {
           headers: { Authorization: `Bearer ${token}` }
         });
         setOngoingCases(casesRes.data.length);

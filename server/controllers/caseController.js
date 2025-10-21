@@ -273,12 +273,40 @@ export const GetClientCases = async (req, res) => {
     if (req.user.role !== 'client') {
       return res.status(403).json({ error: 'Only clients can access this' });
     }
-    
+
     const cases = await Case.find({ client: req.user._id })
       .populate('lawyer', 'name email')
       .sort({ updatedAt: -1 });
-    
+
     res.json(cases);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+// Get cases by status for authenticated user (lawyer or client)
+export const getCasesByStatus = async (req, res) => {
+  try {
+    const { status } = req.query;
+    let query = {};
+
+    if (req.user.role === 'lawyer') {
+      query.lawyer = req.user._id;
+      if (status) query.status = status;
+      const cases = await Case.find(query)
+        .populate('client', 'name email')
+        .sort({ updatedAt: -1 });
+      res.json(cases);
+    } else if (req.user.role === 'client') {
+      query.client = req.user._id;
+      if (status) query.status = status;
+      const cases = await Case.find(query)
+        .populate('lawyer', 'name email')
+        .sort({ updatedAt: -1 });
+      res.json(cases);
+    } else {
+      return res.status(403).json({ error: 'Forbidden' });
+    }
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

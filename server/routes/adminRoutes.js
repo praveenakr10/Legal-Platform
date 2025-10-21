@@ -17,10 +17,10 @@ router.patch("/users/:userId/lock", authenticateToken, authorizeRole("admin"), t
 router.get("/lawyers", authenticateToken, authorizeRole("admin"), getAllLawyers);
 
 // Admin: approve lawyer by ID
-router.patch("/lawyers/:lawyerId/approve", authenticateToken, authorizeRole("admin"), approveLawyer);
+router.patch("/lawyer/:lawyerId/approve", authenticateToken, authorizeRole("admin"), approveLawyer);
 
 // Admin: reject lawyer by ID
-router.patch("/lawyers/:lawyerId/reject", authenticateToken, authorizeRole("admin"), rejectLawyer);
+router.patch("/lawyer/:lawyerId/reject", authenticateToken, authorizeRole("admin"), rejectLawyer);
 
 
 // Protect any route (login not required on /register, /login):

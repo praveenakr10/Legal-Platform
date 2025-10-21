@@ -3,11 +3,14 @@ import { createCase, addMeeting, getCaseById, getPendingCasesForLawyer, handleCo
 import { authenticateToken } from "../middleware/authMiddleware.js";
 import upload from "../middleware/uploadMiddleware.js";
 import { updateMeetingForCase,updateCaseStatus,rateAndReviewCase,getMeetingsForCase, uploadDocumentToCase  } from "../controllers/caseController.js";
-import { deleteMeetingFromCase, GetClientCases} from "../controllers/caseController.js";
+import { deleteMeetingFromCase, GetClientCases, getCasesByStatus} from "../controllers/caseController.js";
 
 
 
 const router = express.Router();
+
+// Get cases by status (for lawyer or client)
+router.get("/", authenticateToken, getCasesByStatus);
 
 // Get all pending cases for lawyer
 router.get("/pending", authenticateToken, getPendingCasesForLawyer);

@@ -37,7 +37,7 @@ app.use("/api/verify", verificationRoutes);
 
 app.use("/feedback", feedbackRoutes);
 
-app.use("/lawyers", lawyerRoutes);
+app.use("/lawyer", lawyerRoutes);
 
 // Middleware
 

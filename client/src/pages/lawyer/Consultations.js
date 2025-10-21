@@ -19,8 +19,8 @@ function Consultations() {
         });
         setLawyerName(profileRes.data.name);
 
-        // Fetch incoming consultation requests
-        const requestsRes = await axios.get('/lawyer/requests', {
+        // Fetch incoming consultation requests (pending cases)
+        const requestsRes = await axios.get('/cases?status=pending', {
           headers: { Authorization: `Bearer ${token}` }
         });
         setRequests(requestsRes.data);
@@ -45,7 +45,7 @@ function Consultations() {
       });
       alert('Request accepted! A new case has been created and client notified.');
       // Refresh requests
-      const updatedRes = await axios.get('/lawyer/requests', {
+      const updatedRes = await axios.get('/cases?status=pending', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setRequests(updatedRes.data);
@@ -62,7 +62,7 @@ function Consultations() {
       });
       alert('Request rejected.');
       // Refresh requests
-      const updatedRes = await axios.get('/lawyer/requests', {
+      const updatedRes = await axios.get('/cases?status=pending', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setRequests(updatedRes.data);
@@ -89,17 +89,17 @@ function Consultations() {
                 padding: "20px",
                 borderRadius: "8px"
               }}>
-                <h3>Client: {request.clientName}</h3>
-                <p>Case Summary: {request.summary}</p>
-                <p>Requested Time: {new Date(request.requestedTime).toLocaleString()}</p>
+                <h3>Client: {request.client?.name || 'Unknown'}</h3>
+                <p>Case Summary: {request.progress || 'No summary provided'}</p>
+                <p>Requested Time: {new Date(request.createdAt).toLocaleString()}</p>
                 <div style={{ marginTop: "10px" }}>
-                  <button 
+                  <button
                     onClick={() => handleAccept(request._id)}
-                    style={{ 
-                      background: "#4CAF50", 
-                      color: "white", 
-                      border: "none", 
-                      padding: "10px 20px", 
+                    style={{
+                      background: "#4CAF50",
+                      color: "white",
+                      border: "none",
+                      padding: "10px 20px",
                       marginRight: "10px",
                       borderRadius: "4px",
                       cursor: "pointer"
@@ -107,13 +107,13 @@ function Consultations() {
                   >
                     Accept
                   </button>
-                  <button 
+                  <button
                     onClick={() => handleReject(request._id)}
-                    style={{ 
-                      background: "#f44336", 
-                      color: "white", 
-                      border: "none", 
-                      padding: "10px 20px", 
+                    style={{
+                      background: "#f44336",
+                      color: "white",
+                      border: "none",
+                      padding: "10px 20px",
                       borderRadius: "4px",
                       cursor: "pointer"
                     }}

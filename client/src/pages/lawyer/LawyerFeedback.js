@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import LawyerNavBar from '../../components/LawyerNavBar';
+import './LawyerFeedback.css';
 
 function LawyerFeedback() {
   const [lawyerName, setLawyerName] = useState('');
@@ -51,55 +52,85 @@ function LawyerFeedback() {
     }
   };
 
-  if (loading) return <div>Loading...</div>;
+  const renderStars = (rating) => {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      stars.push(
+        <span key={i} className={i <= rating ? 'filled' : 'empty'}>
+          ★
+        </span>
+      );
+    }
+    return stars;
+  };
+
+  if (loading) return <div className="feedback-page"><div>Loading...</div></div>;
 
   return (
     <div>
       <LawyerNavBar lawyerName={lawyerName} notifications={notifications} />
-      <div style={{ padding: "30px" }}>
-        <h1>Feedback & Ratings</h1>
+      <div className="feedback-page">
+        <div className="feedback-header">
+          <h1>Feedback & Ratings</h1>
+          <p>View client reviews and provide feedback to administrators</p>
+        </div>
 
-        <h2>Client Ratings & Reviews</h2>
-        {feedbacks.length === 0 ? (
-          <p>No feedbacks yet.</p>
-        ) : (
-          <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-            {feedbacks.map((fb) => (
-              <div key={fb._id} style={{ border: "1px solid #ddd", padding: "20px", borderRadius: "8px" }}>
-                <p><strong>Client:</strong> {fb.client.name}</p>
-                <p><strong>Rating:</strong> {fb.review.rating}/5</p>
-                <p><strong>Review:</strong> {fb.review.review}</p>
-                <p><strong>Date:</strong> {new Date(fb.review.createdAt).toLocaleDateString()}</p>
-              </div>
-            ))}
-          </div>
-        )}
+        <div className="feedback-section">
+          <h2>Client Ratings & Reviews</h2>
+          {feedbacks.length === 0 ? (
+            <div className="no-feedback">
+              <p>No feedbacks yet.</p>
+            </div>
+          ) : (
+            <div className="feedback-list">
+              {feedbacks.map((fb) => (
+                <div key={fb._id} className="feedback-item">
+                  <h3>{fb.client?.name || 'Anonymous Client'}</h3>
+                  <div className="feedback-rating">
+                    <div className="rating-stars">
+                      {renderStars(fb.review?.rating || 0)}
+                    </div>
+                    <span className="rating-number">{fb.review?.rating || 0}/5</span>
+                  </div>
+                  <div className="feedback-text">
+                    {fb.review?.review || 'No review provided'}
+                  </div>
+                  <div className="feedback-date">
+                    {fb.review?.createdAt ? new Date(fb.review.createdAt).toLocaleDateString() : 'Date not available'}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
 
-        <h2>Provide Feedback to Admin</h2>
-        <form onSubmit={handleSubmitAdminFeedback} style={{ marginTop: "20px" }}>
-          <div style={{ marginBottom: "10px" }}>
-            <label>Subject:</label>
-            <input
-              type="text"
-              value={adminFeedback.subject}
-              onChange={(e) => setAdminFeedback({ ...adminFeedback, subject: e.target.value })}
-              required
-              style={{ width: "100%", padding: "8px" }}
-            />
-          </div>
-          <div style={{ marginBottom: "10px" }}>
-            <label>Message:</label>
-            <textarea
-              value={adminFeedback.message}
-              onChange={(e) => setAdminFeedback({ ...adminFeedback, message: e.target.value })}
-              required
-              style={{ width: "100%", height: "100px", padding: "8px" }}
-            />
-          </div>
-          <button type="submit" style={{ padding: "10px 20px", background: "#1268D3", color: "white", border: "none", borderRadius: "4px" }}>
-            Submit Feedback
-          </button>
-        </form>
+        <div className="feedback-section">
+          <h2>Provide Feedback to Admin</h2>
+          <form onSubmit={handleSubmitAdminFeedback} className="feedback-form">
+            <div className="form-group">
+              <label>Subject:</label>
+              <input
+                type="text"
+                value={adminFeedback.subject}
+                onChange={(e) => setAdminFeedback({ ...adminFeedback, subject: e.target.value })}
+                required
+                placeholder="Enter feedback subject"
+              />
+            </div>
+            <div className="form-group">
+              <label>Message:</label>
+              <textarea
+                value={adminFeedback.message}
+                onChange={(e) => setAdminFeedback({ ...adminFeedback, message: e.target.value })}
+                required
+                placeholder="Enter your feedback message"
+              />
+            </div>
+            <button type="submit" className="submit-btn">
+              Submit Feedback
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );

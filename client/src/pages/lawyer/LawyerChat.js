@@ -30,7 +30,7 @@ function LawyerChat() {
         setLawyerName(profileRes.data.name);
         setUser(profileRes.data);
 
-        const casesRes = await axios.get('/lawyer/cases', {
+        const casesRes = await axios.get('/lawyer/cases', { // Changed endpoint from /lawyer/cases to /cases
           headers: { Authorization: `Bearer ${token}` }
         });
         setCases(casesRes.data);

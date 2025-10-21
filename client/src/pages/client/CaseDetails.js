@@ -238,7 +238,7 @@ function CaseDetails() {
       <div className="case-details-page">
         <h2>Case Details</h2>
         <div className="case-summary-card">
-          <div className="summary-item"><b>Lawyer:</b> {caseData.lawyer ? <Link to={`/lawyers/${caseData.lawyer._id}`}>{caseData.lawyer.name}</Link> : 'N/A'}</div>
+          <div className="summary-item"><b>Lawyer:</b> {caseData.lawyer ? <Link to={`/lawyer/${caseData.lawyer._id}`}>{caseData.lawyer.name}</Link> : 'N/A'}</div>
           <div className="summary-item"><b>Status:</b> {caseData.status}</div>
           <div className="summary-item"><b>Progress Update:</b> {caseData.progress || "No update yet"}</div>
           <div className="summary-item"><b>Last Updated:</b> {new Date(caseData.updatedAt).toLocaleString()}</div>

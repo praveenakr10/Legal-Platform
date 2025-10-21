@@ -22,10 +22,10 @@ function LawyerCases() {
         setLawyerName(profileRes.data.name);
 
         // Fetch cases by status (ongoing and completed)
-        const ongoingRes = await axios.get('/lawyer/cases?status=ongoing', {
+        const ongoingRes = await axios.get('/cases?status=ongoing', {
           headers: { Authorization: `Bearer ${token}` }
         });
-        const completedRes = await axios.get('/lawyer/cases?status=completed', {
+        const completedRes = await axios.get('/cases?status=completed', {
           headers: { Authorization: `Bearer ${token}` }
         });
 

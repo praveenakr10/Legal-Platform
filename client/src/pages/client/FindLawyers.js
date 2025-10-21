@@ -32,7 +32,7 @@ function FindLawyers() {
         const params = {};
         if (searchName) params.name = searchName;
         if (searchLocation) params.location = searchLocation;
-        const response = await axios.get('/lawyers/search', {
+        const response = await axios.get('/lawyer/search', {
           headers: { Authorization: `Bearer ${token}` },
           params
         });
